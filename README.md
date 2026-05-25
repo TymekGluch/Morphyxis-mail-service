@@ -25,5 +25,6 @@ bash ./scripts/init.sh
   - `bumpVersion.sh` - script to bump version in go.mod file
   - `dropBinaries.sh` - script to remove binaries from bin directory
   - `docker-compose.yml` - docker compose file to run the service in docker (FOR DEVELOPMENT PURPOSE ONLY)
+  - `Makefile` - makefile to run common commands like build, clean, etc.
 - `go.mod` - go module file
 - `go.sum` - go module dependencies file
