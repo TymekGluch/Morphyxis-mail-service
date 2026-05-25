@@ -25,6 +25,9 @@ bash ./scripts/init.sh
   - `bumpVersion.sh` - script to bump version in go.mod file
   - `dropBinaries.sh` - script to remove binaries from bin directory
   - `docker-compose.yml` - docker compose file to run the service in docker (FOR DEVELOPMENT PURPOSE ONLY)
+  - `configs` - contains configuration files for air (live reload tool)
+    - `air/morphyxis-mail-service.toml` - configuration file for air to run the mail service on air
   - `Makefile` - makefile to run common commands like build, clean, etc.
+    - `make mail-service` - to run the mail service on air
 - `go.mod` - go module file
 - `go.sum` - go module dependencies file

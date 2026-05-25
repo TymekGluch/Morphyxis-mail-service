@@ -1,0 +1,18 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  cmd = "go build -o ./bin/mail-service.exe ./cmd/morphixis-mail-service.go"
+  entrypoint = "./bin/mail-service.exe"
+
+  include_ext = ["go"]
+  include_dir = ["cmd", "internal"]
+
+  exclude_dir = [
+    "tmp",
+    "vendor",
+    "bin",
+  ]
+
+  delay = 1000
+  stop_on_error = true

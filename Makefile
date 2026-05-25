@@ -4,6 +4,10 @@ include .env
 init:
 	bash scripts/init.sh
 
+.PHONY: mail-service
+mail-service:
+	air -c configs/air/morphyxis-mail-service.toml
+
 .PHONY: build
 build: 
 	bash scripts/build.sh
