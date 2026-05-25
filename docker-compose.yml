@@ -1,0 +1,35 @@
+services:
+  mail-service-redis:
+    image: redis:8-alpine
+    container_name: redis
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redisData:/data
+
+    networks:
+      - mailer-service-net
+
+  redis-ui:
+    image: rediscommander/redis-commander:latest
+
+    ports:
+      - "82:8081"
+
+    environment:
+      REDIS_HOSTS: local:mail-service-redis:6379
+
+    depends_on:
+      - mail-service-redis
+
+    networks:
+      - mailer-service-net
+
+volumes:
+  redisData:
+
+networks:
+  mailer-service-net:
+    driver: bridge
