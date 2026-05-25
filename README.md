@@ -7,7 +7,7 @@ Open source go lang package to handle Own Mail Server (Mailcow based) with commo
 1.  to start working with code, execute command
 
 ```bash
-bash ./scripts/init.sh
+make init
 ```
 
 - to copy scripts to git hooks (pre-push, pre-commit etc.)
