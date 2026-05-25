@@ -1,5 +1,9 @@
 include .env
 
+.PHONY: init
+init:
+	bash scripts/init.sh
+
 .PHONY: build
 build: 
 	bash scripts/build.sh
