@@ -1,5 +1,3 @@
-include .env
-
 .PHONY: init
 init:
 	bash scripts/init.sh
