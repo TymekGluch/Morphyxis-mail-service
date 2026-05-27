@@ -4,8 +4,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+jobs:
   update-package-on-pull-request:
-    name: Update BETA Package
+    name: Update beta version of remote image
     runs-on: ubuntu-24.04
     if: github.event_name == 'pull_request'
     env:
@@ -26,8 +27,8 @@ on:
       - name: Run update-package
         run: ./update-package
 
-  update-stable-package-manually:
-    name: Update Stable Package
+  update-package-on-push:
+    name: Update stable version of remote image
     runs-on: ubuntu-24.04
     if: github.event_name == 'workflow_dispatch'
     env:
