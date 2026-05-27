@@ -11,6 +11,7 @@ jobs:
     if: github.event_name == 'pull_request'
     env:
       IS_BETA_VERSION: "true"
+      MORPHYXIS_MAIL_SERVICE_PACKAGE_TOKEN: ${{ secrets.MORPHYXIS_MAIL_SERVICE_PACKAGE_TOKEN }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
@@ -33,6 +34,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     env:
       IS_BETA_VERSION: "false"
+      MORPHYXIS_MAIL_SERVICE_PACKAGE_TOKEN: ${{ secrets.MORPHYXIS_MAIL_SERVICE_PACKAGE_TOKEN }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
