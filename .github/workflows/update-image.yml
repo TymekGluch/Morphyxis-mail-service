@@ -43,7 +43,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ env.REPO_LC }}:${{ env.TAG }}-beta-${{ github.sha }}
+          tags: ghcr.io/${{ env.REPO_LC }}:${{ env.TAG }}-beta-${{ github.run_number }}
 
   update-package-on-push:
     name: Update stable version of remote image

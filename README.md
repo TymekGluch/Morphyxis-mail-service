@@ -15,6 +15,7 @@ make init
 ## Project Structure
 
 - `github/workflow` - contains github workflow files for CI/CD
+  - `update-image.yml` - pipelines to build and push docker images to ghcr registry
 - `cmd` - contains files to start the multiple services
   - `morphixis-mail-service.go` - main file to start the mail service
 - `internal` - contains internal packages for the service
@@ -32,3 +33,15 @@ make init
   - `make mail-service` - to run the mail service on air
 - `go.mod` - go module file
 - `go.sum` - go module dependencies file
+
+## GHCR Registry
+
+- `ghcr.io/morphyxis/morphyxis-mail-service` - contains docker images for morphyxis mail service
+  - `latest` - latest stable version of the image (tagged with git tag & build manually triggered)
+  - `beta` - latest beta version of the image (built on pull request)
+
+to pull the image, execute command
+
+```bash
+  docker pull ghcr.io/tymekgluch/morphyxis-mail-service:latest
+```
