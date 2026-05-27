@@ -41,7 +41,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ env.TAG }}-beta
+          tags: ghcr.io/${{ github.repository || toLowerCase() }}:${{ env.TAG }}-beta
 
   update-package-on-push:
     name: Update stable version of remote image
@@ -79,4 +79,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ env.TAG }}
+          tags: ghcr.io/${{ github.repository || toLowerCase() }}:${{ env.TAG }}
