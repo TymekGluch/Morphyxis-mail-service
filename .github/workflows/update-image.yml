@@ -12,6 +12,8 @@ jobs:
     env:
       IS_BETA_VERSION: "true"
     steps:
+      - name: Lowercase repository name
+        run: echo "REPO_LC=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
       - name: Checkout Repository
         uses: actions/checkout@v6
         with:
@@ -41,7 +43,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository.lower() }}:${{ env.TAG }}-beta-${{ github.sha }}
+          tags: ghcr.io/${{ env.REPO_LC }}:${{ env.TAG }}-beta-${{ github.sha }}
 
   update-package-on-push:
     name: Update stable version of remote image
@@ -50,6 +52,8 @@ jobs:
     env:
       IS_BETA_VERSION: "false"
     steps:
+      - name: Lowercase repository name
+        run: echo "REPO_LC=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
       - name: Checkout Repository
         uses: actions/checkout@v6
         with:
@@ -79,4 +83,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository.lower() }}:${{ env.TAG }}
+          tags: ghcr.io/${{ env.REPO_LC }}:${{ env.TAG }}
