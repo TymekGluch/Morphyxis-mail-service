@@ -26,6 +26,7 @@ jobs:
       - name: Update packages beta version
         run: go build -o update-package cmd/update-package/main.go
       - name: Run update-package
+        run: git fetch --tags
         run: ./update-package
 
   update-package-on-push:
@@ -49,4 +50,5 @@ jobs:
       - name: Update packages stable version
         run: go build -o update-package cmd/update-package/main.go
       - name: Run update-package
+        run: git fetch --tags
         run: ./update-package
