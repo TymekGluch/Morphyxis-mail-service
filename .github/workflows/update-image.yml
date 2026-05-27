@@ -7,7 +7,7 @@ on:
 jobs:
   update-package-on-pull-request:
     name: Update beta version of remote image
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-24.04
     if: github.event_name == 'pull_request'
     env:
       IS_BETA_VERSION: "true"
@@ -45,7 +45,7 @@ jobs:
 
   update-package-on-push:
     name: Update stable version of remote image
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-24.04
     if: github.event_name == 'workflow_dispatch'
     env:
       IS_BETA_VERSION: "false"
