@@ -33,4 +33,5 @@ func main() {
 	log.Printf("IS_BETA_VERSION: %s", isBetaVersion)
 
 	log.Print("Finished uploading new version of Morphyxis Mail Service")
+
 }
