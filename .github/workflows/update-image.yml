@@ -1,0 +1,86 @@
+name: Update Package
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  update-package-on-pull-request:
+    name: Update beta version of remote image
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'pull_request'
+    env:
+      IS_BETA_VERSION: "true"
+    steps:
+      - name: Lowercase repository name
+        run: echo "REPO_LC=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: "go.mod"
+          check-latest: true
+          cache-dependency-path: "go.sum"
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.MORPHYXIS_MAIL_SERVICE_PACKAGE_TOKEN }}
+
+      - name: Get git tag
+        id: get_tag
+        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
+      - name: Build and push image (beta)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ env.REPO_LC }}:${{ env.TAG }}-beta-${{ github.run_number }}
+
+  update-package-on-push:
+    name: Update stable version of remote image
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'workflow_dispatch'
+    env:
+      IS_BETA_VERSION: "false"
+    steps:
+      - name: Lowercase repository name
+        run: echo "REPO_LC=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: "go.mod"
+          check-latest: true
+          cache-dependency-path: "go.sum"
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.MORPHYXIS_MAIL_SERVICE_PACKAGE_TOKEN }}
+
+      - name: Get git tag
+        id: get_tag
+        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
+      - name: Build and push image (stable)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ env.REPO_LC }}:${{ env.TAG }}
