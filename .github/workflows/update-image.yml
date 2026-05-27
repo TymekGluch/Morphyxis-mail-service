@@ -25,8 +25,9 @@ jobs:
           cache-dependency-path: "go.sum"
       - name: Update packages beta version
         run: go build -o update-package cmd/update-package/main.go
-      - name: Run update-package
+      - name: Fetch tags
         run: git fetch --tags
+      - name: Run update-package
         run: ./update-package
 
   update-package-on-push:
@@ -49,6 +50,7 @@ jobs:
           cache-dependency-path: "go.sum"
       - name: Update packages stable version
         run: go build -o update-package cmd/update-package/main.go
-      - name: Run update-package
+      - name: Fetch tags
         run: git fetch --tags
+      - name: Run update-package
         run: ./update-package
