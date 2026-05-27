@@ -1,0 +1,49 @@
+name: Update Package
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+  update-package-on-pull-request:
+    name: Update BETA Package
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'pull_request'
+    env:
+      IS_BETA_VERSION: "true"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: "go.mod"
+          check-latest: true
+          cache-dependency-path: "go.sum"
+      - name: Update packages beta version
+        run: go build -o update-package cmd/update-package/main.go
+      - name: Run update-package
+        run: ./update-package
+
+  update-stable-package-manually:
+    name: Update Stable Package
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'workflow_dispatch'
+    env:
+      IS_BETA_VERSION: "false"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: "go.mod"
+          check-latest: true
+          cache-dependency-path: "go.sum"
+      - name: Update packages stable version
+        run: go build -o update-package cmd/update-package/main.go
+      - name: Run update-package
+        run: ./update-package

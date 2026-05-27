@@ -10,17 +10,15 @@ if [ ! -d "cmd" ]; then
   echo "cmd directory is missing"
   exit 1
 else
-  cd cmd
-  files=( ./*.go )
-
-  filesCount=${#files[@]}
-
-  for file in "${files[@]}"; do
-    filename=$(basename "$file" .go)
-
-    go build -o "../bin/$filename" "$file"
-    echo "file $filename created in bin directory"
+  for dir in cmd/*/; do
+    [ -d "$dir" ] || continue
+    dirname=$(basename "$dir")
+    mainFile="$dir/main.go"
+    if [ -f "$mainFile" ]; then
+      go build -o "bin/$dirname" "$mainFile"
+      echo "binary $dirname created in bin directory"
+    else
+      echo "main file $mainFile not found, skipping"
+    fi
   done
-
-  echo "total $filesCount files created in bin directory"
 fi
