@@ -52,6 +52,8 @@ newVersion=$(incrementVersionByConventionalCommits "$version" "$commit_range")
 
 if [ "$newVersion" != "$version" ]; then
   git tag "$newVersion"
+  git push origin "$newVersion"
+  
   echo "New tag created: $newVersion"
 else
   echo "No version increment needed. Version remains: $version"
