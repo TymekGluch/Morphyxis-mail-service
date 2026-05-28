@@ -6,3 +6,6 @@ bin/*
 tmp
 tmp/**
 tmp/*
+
+.env
+.env.local

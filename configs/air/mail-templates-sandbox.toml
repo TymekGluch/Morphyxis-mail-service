@@ -1,0 +1,18 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  cmd = "templ generate; go build -o ./bin/mail-templates-sandbox.exe ./cmd/mail-templates-sandbox/main.go"
+  entrypoint = "./bin/mail-templates-sandbox.exe"
+
+  include_ext = ["go"]
+  include_dir = ["cmd", "internal"]
+
+  exclude_dir = [
+    "tmp",
+    "vendor",
+    "bin",
+  ]
+
+  delay = 1000
+  stop_on_error = true
