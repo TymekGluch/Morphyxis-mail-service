@@ -26,22 +26,22 @@ func main() {
 	})
 
 	app.Get("/templates/confirmationAccount", templ.Handler(templatesFiles.AccountConfirmation(templates.AccountConfirmationInput{
-		Name:                "Park Dildos Smith",
+		Name:                "Park Smith",
 		VerificationCode:    "123456d",
 		AccountDeletionDate: time.Now().Add(24 * 7 * time.Hour),
 	})))
 
 	app.Get("/templates/deletedAccount", templ.Handler(templatesFiles.DeletedAccount(templates.DeletedAccountInput{
-		Name:   "Park Dildos Smith",
+		Name:   "Park Smith",
 		Reason: "You have not confirmed your account within 7 days.",
 	})))
 
 	app.Get("/templates/accountVerified", templ.Handler(templatesFiles.AccountVerified(templates.AccountVerifiedInput{
-		Name: "Park Dildos Smith ",
+		Name: "Park Smith ",
 	})))
 
 	app.Get("/templates/passwordWasChanged", templ.Handler(templatesFiles.PasswordWasChanged(templates.PasswordWasChangedInput{
-		Name:          "Park Dildos Smith ",
+		Name:          "Park Smith ",
 		DateOfRequest: time.Now(),
 	})))
 
