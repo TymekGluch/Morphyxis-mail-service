@@ -14,7 +14,7 @@ func main() {
 
 	app.Get("/", func(ctx fiber.Ctx) error {
 		templates := []string{
-			"confirmationAccount",
+			"accountConfirmation",
 			"deletedAccount",
 			"accountVerified",
 			"passwordWasChanged",
@@ -25,7 +25,7 @@ func main() {
 		})
 	})
 
-	app.Get("/templates/confirmationAccount", templ.Handler(templatesFiles.AccountConfirmation(templates.AccountConfirmationInput{
+	app.Get("/templates/accountConfirmation", templ.Handler(templatesFiles.AccountConfirmation(templates.AccountConfirmationInput{
 		Name:                "Park Smith",
 		VerificationCode:    "123456d",
 		AccountDeletionDate: time.Now().Add(24 * 7 * time.Hour),

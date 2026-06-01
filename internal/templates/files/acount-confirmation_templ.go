@@ -33,14 +33,14 @@ func AccountConfirmation(input templates.AccountConfirmationInput) templ.Compone
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div style=\"background: #f8fbff; width: 100%; padding: 36px; margin: 0;\"><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background: #ffffff; width: 100%; max-width: 600px; margin: 40px auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;\"><tr><td style=\"padding: 36px; text-align: left;\"><h2 style=\"margin: 0 0 12px 0; color: #1a237e; font-size: 24px; font-weight: 700; letter-spacing: 0.5px;\">Witaj, ")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div style=\"background: #f8fbff; width: 100%; padding: 36px; margin: 0;\"><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background: #ffffff; width: 100%; max-width: 600px; margin: 40px auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;\"><tr><td style=\"padding: 36px; text-align: left;\"><h2 style=\"margin: 0 0 12px 0; color: #1a237e; font-size: 24px; font-weight: 700; letter-spacing: 0.5px;\">Hi, ")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(input.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/files/acount-confirmation.templ`, Line: 12, Col: 134}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/files/acount-confirmation.templ`, Line: 12, Col: 131}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
