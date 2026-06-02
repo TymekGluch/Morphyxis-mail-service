@@ -1,6 +1,6 @@
 root = "."
 tmp_dir = "tmp"
-env_files = [".env.local"]
+env_files = [".env"]
 
 [build]
   cmd = "go build -o ./bin/mail-service.exe ./cmd/morphixis-mail-service/main.go"
