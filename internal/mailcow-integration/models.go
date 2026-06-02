@@ -49,3 +49,75 @@ func (input SendAccountConfirmationEmailInput) Validate() error {
 
 	return nil
 }
+
+type SendAccountVerifiedEmailInput struct {
+	To      string
+	Subject string
+	Name    string
+}
+
+func (input SendAccountVerifiedEmailInput) Validate() error {
+	if To := input.To; To == "" {
+		return fmt.Errorf(mailcowInputToValidationError)
+	}
+
+	if Subject := input.Subject; Subject == "" {
+		return fmt.Errorf(mailcowInputSubjectValidationError)
+	}
+
+	if Name := input.Name; Name == "" {
+		return fmt.Errorf(mailcowInputNameValidationError)
+	}
+
+	return nil
+}
+
+type SendPasswordWasChangedEmailInput struct {
+	To            string
+	Subject       string
+	Name          string
+	DateOfRequest time.Time
+}
+
+func (input SendPasswordWasChangedEmailInput) Validate() error {
+	if To := input.To; To == "" {
+		return fmt.Errorf(mailcowInputToValidationError)
+	}
+
+	if Subject := input.Subject; Subject == "" {
+		return fmt.Errorf(mailcowInputSubjectValidationError)
+	}
+
+	if Name := input.Name; Name == "" {
+		return fmt.Errorf(mailcowInputNameValidationError)
+	}
+
+	return nil
+}
+
+type SendDeletedAccountEmailInput struct {
+	To      string
+	Subject string
+	Name    string
+	Reason  string
+}
+
+func (input SendDeletedAccountEmailInput) Validate() error {
+	if To := input.To; To == "" {
+		return fmt.Errorf(mailcowInputToValidationError)
+	}
+
+	if Subject := input.Subject; Subject == "" {
+		return fmt.Errorf(mailcowInputSubjectValidationError)
+	}
+
+	if Name := input.Name; Name == "" {
+		return fmt.Errorf(mailcowInputNameValidationError)
+	}
+
+	if Reason := input.Reason; Reason == "" {
+		return fmt.Errorf(mailcowInputReasonValidationError)
+	}
+
+	return nil
+}

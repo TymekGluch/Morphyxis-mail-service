@@ -12,6 +12,18 @@ make init
 
 - to copy scripts to git hooks (pre-push, pre-commit etc.)
 
+## GHCR Registry
+
+- `ghcr.io/morphyxis/morphyxis-mail-service` - contains docker images for morphyxis mail service
+  - `latest` - latest stable version of the image (tagged with git tag & build manually triggered)
+  - `beta` - latest beta version of the image (built on pull request)
+
+to pull the image, execute command
+
+```bash
+  docker pull ghcr.io/tymekgluch/morphyxis-mail-service:latest
+```
+
 ## Project Structure
 
 - `github/workflow` - contains github workflow files for CI/CD
@@ -28,7 +40,13 @@ make init
       - `password-was-changed.go` - mail template for password was changed mail
     - `models.go` - contains models for mail templates
     - `handlers.go` - contains handler to render mail templates
-  - `router.go` - contains router for the service
+  - `mailcow-integration` - contains integration with Mailcow API (f.e. smtp requests and handler for all mail templates)
+    - `client.go` - contains client to interact with mailcow API
+    - `config.go` - contains credentials for the mailcow client
+    - `constants.go`,
+    - `helpers.go` - contains helper functions
+    - `models.go` - contains models for mailcow API
+  - `router` - contains router for the service
 - `scripts` - contains scripts for build, init and pre-push hook
   - `build.sh` - script to build the project (loop for all files in cmd directory)
   - `init.sh` - script to initialize the project (copy pre-push hook)
@@ -50,15 +68,3 @@ make init
   - `make help` - to show help message with all available commands
 - `go.mod` - go module file
 - `go.sum` - go module dependencies file
-
-## GHCR Registry
-
-- `ghcr.io/morphyxis/morphyxis-mail-service` - contains docker images for morphyxis mail service
-  - `latest` - latest stable version of the image (tagged with git tag & build manually triggered)
-  - `beta` - latest beta version of the image (built on pull request)
-
-to pull the image, execute command
-
-```bash
-  docker pull ghcr.io/tymekgluch/morphyxis-mail-service:latest
-```
