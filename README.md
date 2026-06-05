@@ -1,6 +1,6 @@
 # MORPHYXIS MAIL SERVICE
 
-Open source go lang package to handle Own Mail Server (Mailcow based) with common mail template and handle common requests like parameter GET request for mails and POST request to send mails
+Small Open source go lang package to handle Own Mail Server (Mailcow based) with common mail template and handle common requests like POST request to send mails with custom templates
 
 ## Get Started
 
