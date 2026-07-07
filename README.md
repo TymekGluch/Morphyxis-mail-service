@@ -30,6 +30,29 @@ to pull the image, execute command
   docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.0.0
 ```
 
+to run the image on your server:
+
+```bash
+docker run -d \
+  -e MAILCOW_MAILBOX_PASSWORD=somePassword \
+  -e MAILCOW_SMTP_HOST=https://mail.domain.com \
+  -e MAILCOW_SMTP_PORT=453 \
+  -e MAILCOW_USER=someUser \
+  -e MORPHYXIS_MAIL_SERVICE_PORT=8080 \
+  -p 8080:8080 \
+  ghcr.io/morphyxis/morphyxis-mail-service:1.0.0
+```
+
+or with file `.env` (recommended):
+
+```bash
+docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.0.0
+docker run -d \
+  --env-file .env \
+  -p 8080:8080 \
+  ghcr.io/morphyxis/morphyxis-mail-service:1.0.0
+```
+
 ## Project Structure
 
 - `github/workflow` - contains github workflow files for CI/CD
