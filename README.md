@@ -21,13 +21,13 @@ make init
 ## GHCR Registry
 
 - `ghcr.io/morphyxis/morphyxis-mail-service` - contains docker images for morphyxis mail service
-  - `latest` - latest stable version of the image (tagged with git tag & build manually triggered)
+  - `1.0.0` - latest stable version of the image (tagged with git tag & build manually triggered)
   - `beta` - latest beta version of the image (built on pull request)
 
 to pull the image, execute command
 
 ```bash
-  docker pull ghcr.io/tymekgluch/morphyxis-mail-service:latest
+  docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.0.0
 ```
 
 ## Project Structure
@@ -38,6 +38,18 @@ to pull the image, execute command
   - `morphixis-mail-service.go` - main file to start the mail service
   - `mail-templates-sandbox` - file to start the mail templates sandbox (FOR DEVELOPMENT PURPOSE ONLY)
 - `internal` - contains internal packages for the service
+  - `api-docs` - contains swagger documentation for the service
+  - `docs` - genderated swagger documentation for the service
+  - `mailcow-integration` - contains integration with Mailcow API (f.e. smtp requests and handler for all mail templates)
+    - `client.go` - contains client to interact with mailcow API
+    - `config.go` - contains credentials for the mailcow client
+    - `constants.go`,
+    - `helpers.go` - contains helper functions
+    - `models.go` - contains models for mailcow API
+  - `mails` - contains module to handle mails
+    - `handlers.go` - contains handler to send mails with mailcow API
+    - `models.go` - contains models for mails
+    - `router.go` - contains router to handle mail requests
   - `templates` - contains module to handle mail templates
     - `files` - contains mail template files
       - `account-verified.go` - mail template for account verified mail
@@ -46,19 +58,18 @@ to pull the image, execute command
       - `password-was-changed.go` - mail template for password was changed mail
     - `models.go` - contains models for mail templates
     - `handlers.go` - contains handler to render mail templates
-  - `mailcow-integration` - contains integration with Mailcow API (f.e. smtp requests and handler for all mail templates)
-    - `client.go` - contains client to interact with mailcow API
-    - `config.go` - contains credentials for the mailcow client
-    - `constants.go`,
-    - `helpers.go` - contains helper functions
-    - `models.go` - contains models for mailcow API
-  - `router` - contains router for the service
+  - `timeouts` - contains module to handle timeout for requests
+    - `middleware.go` - contains timeout handler for requests
 - `scripts` - contains scripts for build, init and pre-push hook
   - `build.sh` - script to build the project (loop for all files in cmd directory)
   - `init.sh` - script to initialize the project (copy pre-push hook)
+  - `postBumpVersion.sh` - script to run after bumping version (set version in docs and push to remote)
+  - `postmanSync.sh` - script to sync Postman collection with Postman API
   - `prePush.sh` - script to run before pushing code to remote
   - `bumpVersion.sh` - script to bump version in go.mod file
   - `dropBinaries.sh` - script to remove binaries from bin directory
+- `postman` - contains Postman collection for the service
+  - `morphyxis-mail-service.postman_collection.json` - Postman collection for the service
 - `docker-compose.yml` - docker compose file to run the service in docker (FOR DEVELOPMENT PURPOSE ONLY)
 - `Dockerfile` - contains Dockerfiles for building docker images for morpxysis mail service
 - `configs` - contains configuration files for air (live reload tool)
