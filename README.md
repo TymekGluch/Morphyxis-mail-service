@@ -5,7 +5,7 @@ Small Open source go lang package to handle Own Mail Server (Mailcow based) with
 ## Current Version
 
 ```bash
-0.0.0
+1.0.0
 ```
 
 ## Get Started
