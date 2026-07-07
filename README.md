@@ -2,6 +2,12 @@
 
 Small Open source go lang package to handle Own Mail Server (Mailcow based) with common mail template and handle common requests like POST request to send mails with custom templates
 
+## Current Version
+
+```bash
+0.0.0
+```
+
 ## Get Started
 
 1.  to start working with code, execute command
