@@ -2,6 +2,7 @@ package mails
 
 import (
 	mailcowIntegration "Morphyxis-mail-service/internal/mailcow-integration"
+	"Morphyxis-mail-service/internal/timeouts"
 
 	"github.com/gofiber/fiber/v3"
 )
@@ -9,7 +10,7 @@ import (
 func RegisterRoutes(app fiber.Router, mailcowClient *mailcowIntegration.SmtpMailClient) {
 	handlers := &handlers{mailcowClient}
 
-	emailGroup := app.Group("/emails")
+	emailGroup := app.Group("/emails", timeouts.WithDefaultTimeoutHandler())
 
 	emailGroup.Get("/health-check", healthCheckHandler)
 	emailGroup.Post("/account-confirmation", handlers.SendAccountConfirmationEmail)
