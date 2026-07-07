@@ -31,11 +31,11 @@ type SmtpMailClient struct {
 }
 
 type SendAccountConfirmationEmailInput struct {
-	To                  string
-	Subject             string
-	Name                string
-	VerificationCode    string
-	AccountDeletionDate time.Time
+	To                  string    `json:"to"`
+	Subject             string    `json:"subject"`
+	Name                string    `json:"name"`
+	VerificationCode    string    `json:"verification_code"`
+	AccountDeletionDate time.Time `json:"account_deletion_date"`
 }
 
 func (input SendAccountConfirmationEmailInput) Validate() error {
@@ -51,9 +51,9 @@ func (input SendAccountConfirmationEmailInput) Validate() error {
 }
 
 type SendAccountVerifiedEmailInput struct {
-	To      string
-	Subject string
-	Name    string
+	To      string `json:"to"`
+	Subject string `json:"subject"`
+	Name    string `json:"name"`
 }
 
 func (input SendAccountVerifiedEmailInput) Validate() error {
@@ -73,10 +73,10 @@ func (input SendAccountVerifiedEmailInput) Validate() error {
 }
 
 type SendPasswordWasChangedEmailInput struct {
-	To            string
-	Subject       string
-	Name          string
-	DateOfRequest time.Time
+	To            string    `json:"to"`
+	Subject       string    `json:"subject"`
+	Name          string    `json:"name"`
+	DateOfRequest time.Time `json:"date_of_request"`
 }
 
 func (input SendPasswordWasChangedEmailInput) Validate() error {
@@ -96,10 +96,10 @@ func (input SendPasswordWasChangedEmailInput) Validate() error {
 }
 
 type SendDeletedAccountEmailInput struct {
-	To      string
-	Subject string
-	Name    string
-	Reason  string
+	To      string `json:"to"`
+	Subject string `json:"subject"`
+	Name    string `json:"name"`
+	Reason  string `json:"reason"`
 }
 
 func (input SendDeletedAccountEmailInput) Validate() error {
