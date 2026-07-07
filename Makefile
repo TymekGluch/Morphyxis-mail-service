@@ -1,3 +1,5 @@
+-include .env
+
 .PHONY: init
 init:
 	bash scripts/init.sh
@@ -9,6 +11,14 @@ mail-service:
 .PHONY: mail-templates-sandbox
 mail-templates-sandbox:
 	air -c configs/air/mail-templates-sandbox.toml
+
+.PHONY: docs
+docs:
+	swag init -g cmd/morphixis-mail-service/main.go -o internal/docs
+
+.PHONY: postman-sync
+postman-sync:
+	bash scripts/postmanSync.sh
 
 .PHONY: build
 build: 
@@ -31,4 +41,7 @@ help:
 	@echo "  bump-version - Bump version based on conventional commits"
 	@echo "  mail-service - Start the mail service with air"
 	@echo "  mail-templates-sandbox - Start the mail templates sandbox with air"
-	@echo "  help    - Show this help message"
+	@echo "  postman-sync - Sync Postman collection"
+	@echo "  init - Initialize the project"
+	@echo "  docs - Generate Swagger documentation"
+	@echo "  help - Show this help message"

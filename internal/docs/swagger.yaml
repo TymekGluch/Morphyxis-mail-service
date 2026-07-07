@@ -1,0 +1,205 @@
+basePath: /api
+definitions:
+  mails.SendAccountConfirmationEmailInput:
+    properties:
+      account_deletion_date:
+        type: string
+      name:
+        type: string
+      subject:
+        type: string
+      to:
+        type: string
+      verification_code:
+        type: string
+    type: object
+  mails.SendAccountVerifiedEmailInput:
+    properties:
+      name:
+        type: string
+      subject:
+        type: string
+      to:
+        type: string
+    type: object
+  mails.SendDeletedAccountEmailInput:
+    properties:
+      name:
+        type: string
+      reason:
+        type: string
+      subject:
+        type: string
+      to:
+        type: string
+    type: object
+  mails.SendPasswordWasChangedEmailInput:
+    properties:
+      date_of_request:
+        type: string
+      name:
+        type: string
+      subject:
+        type: string
+      to:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Morphyxis-mail-service API documentation
+  title: Morphyxis-mail-service API
+  version: 0.4.0
+paths:
+  /api/emails/account-confirmation:
+    post:
+      consumes:
+      - application/json
+      description: Sends an account confirmation email with a verification code
+      parameters:
+      - description: Account Confirmation Email Input
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/mails.SendAccountConfirmationEmailInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "408":
+          description: Request Timeout
+          schema: {}
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Send Account Confirmation Email
+      tags:
+      - Emails
+  /api/emails/account-verified:
+    post:
+      consumes:
+      - application/json
+      description: Sends an email notifying the user that their account has been verified
+      parameters:
+      - description: Account Verified Email Input
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/mails.SendAccountVerifiedEmailInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "408":
+          description: Request Timeout
+          schema: {}
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Send Account Verified Email
+      tags:
+      - Emails
+  /api/emails/deleted-account:
+    post:
+      consumes:
+      - application/json
+      description: Sends an email notifying the user that their account has been deleted
+      parameters:
+      - description: Deleted Account Email Input
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/mails.SendDeletedAccountEmailInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "408":
+          description: Request Timeout
+          schema: {}
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Send Deleted Account Email
+      tags:
+      - Emails
+  /api/emails/password-was-changed:
+    post:
+      consumes:
+      - application/json
+      description: Sends an email notifying the user that their password has been
+        changed
+      parameters:
+      - description: Password Was Changed Email Input
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/mails.SendPasswordWasChangedEmailInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "408":
+          description: Request Timeout
+          schema: {}
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Send Password Was Changed Email
+      tags:
+      - Emails
+  /api/health-check:
+    get:
+      consumes:
+      - application/json
+      description: Health Check Handler
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema: {}
+        "408":
+          description: Request Timeout
+          schema: {}
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Health Check Handler
+      tags:
+      - Health Health Check
+schemes:
+- https
+- http
+swagger: "2.0"
