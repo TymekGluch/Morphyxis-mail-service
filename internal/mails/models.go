@@ -1,7 +1,7 @@
 package mails
 
 import (
-	mailcowIntegration "Morphyxis-mail-service/internal/mailcow-integration"
+	mailcowIntegration "github.com/TymekGluch/Morphyxis-mail-service/internal/mailcow-integration"
 
 	validation "github.com/go-ozzo/ozzo-validation"
 	is "github.com/go-ozzo/ozzo-validation/v4/is"

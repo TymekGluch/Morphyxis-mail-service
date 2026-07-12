@@ -1,8 +1,8 @@
 package mails
 
 import (
-	mailcowIntegration "Morphyxis-mail-service/internal/mailcow-integration"
-	"Morphyxis-mail-service/internal/timeouts"
+	mailcowIntegration "github.com/TymekGluch/Morphyxis-mail-service/internal/mailcow-integration"
+	"github.com/TymekGluch/Morphyxis-mail-service/internal/timeouts"
 
 	"github.com/gofiber/fiber/v3"
 )

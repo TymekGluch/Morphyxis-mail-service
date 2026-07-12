@@ -3,7 +3,7 @@ package mails
 import (
 	"github.com/gofiber/fiber/v3"
 
-	mailcowIntegration "Morphyxis-mail-service/internal/mailcow-integration"
+	mailcowIntegration "github.com/TymekGluch/Morphyxis-mail-service/internal/mailcow-integration"
 )
 
 type handlers struct {
