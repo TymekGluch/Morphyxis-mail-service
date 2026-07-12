@@ -1,9 +1,10 @@
 package apiDocs
 
 import (
-	"Morphyxis-mail-service/internal/docs"
 	"encoding/json"
 	"fmt"
+
+	"github.com/TymekGluch/Morphyxis-mail-service/internal/docs"
 
 	"github.com/getkin/kin-openapi/openapi2"
 	"github.com/getkin/kin-openapi/openapi2conv"

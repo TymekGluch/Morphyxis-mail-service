@@ -138,7 +138,7 @@ import (
   "log"
   "time"
 
-  mailClient "github.com/morphyxis/morphyxis-mail-service/pkg/morphyxis-mail-client"
+  mailClient "github.com/TymekGluch/Morphyxis-mail-service/pkg/morphyxis-mail-client"
 )
 
 func main() {

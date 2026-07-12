@@ -1,9 +1,10 @@
 package main
 
 import (
-	"Morphyxis-mail-service/internal/templates"
-	templatesFiles "Morphyxis-mail-service/internal/templates/files"
 	"time"
+
+	"github.com/TymekGluch/Morphyxis-mail-service/internal/templates"
+	templatesFiles "github.com/TymekGluch/Morphyxis-mail-service/internal/templates/files"
 
 	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v3"

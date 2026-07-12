@@ -1,4 +1,4 @@
-module Morphyxis-mail-service
+module github.com/TymekGluch/Morphyxis-mail-service
 
 go 1.26.3
 
