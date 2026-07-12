@@ -32,7 +32,7 @@ func (client SmtpMailClient) newMailClient() (*mail.Client, error) {
 		mail.WithSMTPAuth(mail.SMTPAuthPlain),
 		mail.WithUsername(client.User),
 		mail.WithPassword(client.Password),
-		mail.WithTLSConfig(&tls.Config{ServerName: client.Host}),
+		mail.WithTLSConfig(&tls.Config{ServerName: client.Domain}),
 	)
 }
 

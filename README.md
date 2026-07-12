@@ -35,7 +35,8 @@ to run the image on your server:
 ```bash
 docker run -d \
   -e MAILCOW_MAILBOX_PASSWORD=somePassword \
-  -e MAILCOW_SMTP_HOST=https://mail.domain.com \
+  -e MAILCOW_SMTP_HOST=postfix-mailcow \
+  -e MAILCOW_SMTP_DOMAIN=mail.domain.com \
   -e MAILCOW_SMTP_PORT=453 \
   -e MAILCOW_USER=someUser \
   -e MORPHYXIS_MAIL_SERVICE_PORT=8080 \
