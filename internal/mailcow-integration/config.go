@@ -10,6 +10,7 @@ type smtpConfig struct {
 	Port     string
 	User     string
 	Password string
+	Domain   string
 }
 
 const (
@@ -23,6 +24,11 @@ func initConfig() (smtpConfig, error) {
 	host := os.Getenv("MAILCOW_SMTP_HOST")
 	if host == "" {
 		return smtpConfig{}, fmt.Errorf(hostMissingError)
+	}
+
+	domain := os.Getenv("MAILCOW_SMTP_DOMAIN")
+	if domain == "" {
+		return smtpConfig{}, fmt.Errorf("MAILCOW_SMTP_DOMAIN environment variable is not set")
 	}
 
 	port := os.Getenv("MAILCOW_SMTP_PORT")
@@ -42,6 +48,7 @@ func initConfig() (smtpConfig, error) {
 
 	return smtpConfig{
 		Host:     host,
+		Domain:   domain,
 		Port:     port,
 		User:     user,
 		Password: password,

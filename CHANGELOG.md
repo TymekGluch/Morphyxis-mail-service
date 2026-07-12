@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.2] - 2026-07-12
+
+- Added configurable independent TLS Server name and Mailcow port
+
 ## [1.0.1] - 2026-07-12
 
 ### Added
