@@ -5,7 +5,7 @@ Small Open source go lang package to handle Own Mail Server (Mailcow based) with
 ## Current Version
 
 ```bash
-1.0.2
+1.1.0
 ```
 
 ## Get Started
@@ -26,13 +26,13 @@ The Mailcow nginx configuration must be extended or overridden to proxy requests
 ## GHCR Registry
 
 - `ghcr.io/morphyxis/morphyxis-mail-service` - contains docker images for morphyxis mail service
-  - `1.0.2` - latest stable version of the image (tagged with git tag & build manually triggered)
+  - `1.1.0` - latest stable version of the image (tagged with git tag & build manually triggered)
   - `beta` - latest beta version of the image (built on pull request)
 
 to pull the image, execute command
 
 ```bash
-  docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.0.2
+  docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.1.0
 ```
 
 to run the image on your server:
@@ -46,17 +46,17 @@ docker run -d \
   -e MAILCOW_USER=someUser \
   -e MORPHYXIS_MAIL_SERVICE_PORT=8080 \
   -p 8080:8080 \
-  ghcr.io/morphyxis/morphyxis-mail-service:1.0.2
+  ghcr.io/morphyxis/morphyxis-mail-service:1.1.0
 ```
 
 or with file `.env` (recommended):
 
 ```bash
-docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.0.2
+docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.1.0
 docker run -d \
   --env-file .env \
   -p 8080:8080 \
-  ghcr.io/morphyxis/morphyxis-mail-service:1.0.2
+  ghcr.io/morphyxis/morphyxis-mail-service:1.1.0
 ```
 
 ## Project Structure
@@ -66,6 +66,13 @@ docker run -d \
 - `cmd` - contains files to start the multiple services
   - `morphixis-mail-service.go` - main file to start the mail service
   - `mail-templates-sandbox` - file to start the mail templates sandbox (FOR DEVELOPMENT PURPOSE ONLY)
+- `pkg/` - contains go packages for the service
+  - `morphyxis-mail-client` - contains go client to interact with morphyxis mail service
+    - `client.go` - contains client to interact with morphyxis mail service
+    - `config.go` - contains configuration for the client
+    - `constants.go` - contains constants for the client
+    - `helpers.go` - contains helper functions for the client
+    - `models.go` - contains models for the client
 - `internal` - contains internal packages for the service
   - `api-docs` - contains swagger documentation for the service
   - `docs` - genderated swagger documentation for the service
@@ -114,3 +121,43 @@ docker run -d \
   - `make help` - to show help message with all available commands
 - `go.mod` - go module file
 - `go.sum` - go module dependencies file
+
+## GO client - morphyxis-mail-client
+
+client to interact with morphyxis mail service
+
+### Usage
+
+```go
+package main
+
+import (
+  "context"
+  "log"
+  "time"
+
+  mailClient "github.com/morphyxis/morphyxis-mail-service/pkg/morphyxis-mail-client"
+)
+
+func main() {
+  mc, err := mailClient.New(mailClient.Config{
+    BaseURL: "https://mail.example.com",
+  })
+  if err != nil {
+    log.Fatal(err)
+  }
+
+  ctx := context.Background()
+
+  err = mc.SendAccountConfirmationEmail(ctx, mailClient.SendAccountConfirmationEmailInput{
+    To:                  "user@example.com",
+    Subject:             "Confirm your account",
+    Name:                "Jan Kowalski",
+    VerificationCode:    "ABC123",
+    AccountDeletionDate: time.Now().Add(30 * 24 * time.Hour),
+  })
+  if err != nil {
+    log.Fatal(err)
+  }
+}
+```
