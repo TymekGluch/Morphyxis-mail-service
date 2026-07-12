@@ -66,6 +66,13 @@ docker run -d \
 - `cmd` - contains files to start the multiple services
   - `morphixis-mail-service.go` - main file to start the mail service
   - `mail-templates-sandbox` - file to start the mail templates sandbox (FOR DEVELOPMENT PURPOSE ONLY)
+- `pkg/` - contains go packages for the service
+  - `morphyxis-mail-client` - contains go client to interact with morphyxis mail service
+    - `client.go` - contains client to interact with morphyxis mail service
+    - `config.go` - contains configuration for the client
+    - `constants.go` - contains constants for the client
+    - `helpers.go` - contains helper functions for the client
+    - `models.go` - contains models for the client
 - `internal` - contains internal packages for the service
   - `api-docs` - contains swagger documentation for the service
   - `docs` - genderated swagger documentation for the service
@@ -114,3 +121,43 @@ docker run -d \
   - `make help` - to show help message with all available commands
 - `go.mod` - go module file
 - `go.sum` - go module dependencies file
+
+## GO client - morphyxis-mail-client
+
+client to interact with morphyxis mail service
+
+### Usage
+
+```go
+package main
+
+import (
+  "context"
+  "log"
+  "time"
+
+  mailClient "github.com/morphyxis/morphyxis-mail-service/pkg/morphyxis-mail-client"
+)
+
+func main() {
+  mc, err := mailClient.New(mailClient.Config{
+    BaseURL: "https://mail.example.com",
+  })
+  if err != nil {
+    log.Fatal(err)
+  }
+
+  ctx := context.Background()
+
+  err = mc.SendAccountConfirmationEmail(ctx, mailClient.SendAccountConfirmationEmailInput{
+    To:                  "user@example.com",
+    Subject:             "Confirm your account",
+    Name:                "Jan Kowalski",
+    VerificationCode:    "ABC123",
+    AccountDeletionDate: time.Now().Add(30 * 24 * time.Hour),
+  })
+  if err != nil {
+    log.Fatal(err)
+  }
+}
+```
