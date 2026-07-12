@@ -23,6 +23,8 @@ make init
 This container must be connected to the `mailcowdockerized_mailcow-network` Docker network.
 The Mailcow nginx configuration must be extended or overridden to proxy requests to this service.
 
+- WARNING: This service does not implement authorization. I highly recommend securing it with mutual TLS (mTLS).
+
 ## GHCR Registry
 
 - `ghcr.io/morphyxis/morphyxis-mail-service` - contains docker images for morphyxis mail service
