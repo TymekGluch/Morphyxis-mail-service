@@ -18,6 +18,11 @@ make init
 
 - to copy scripts to git hooks (pre-push, pre-commit etc.)
 
+## Before installation
+
+This container must be connected to the `mailcowdockerized_mailcow-network` Docker network.
+The Mailcow nginx configuration must be extended or overridden to proxy requests to this service.
+
 ## GHCR Registry
 
 - `ghcr.io/morphyxis/morphyxis-mail-service` - contains docker images for morphyxis mail service
