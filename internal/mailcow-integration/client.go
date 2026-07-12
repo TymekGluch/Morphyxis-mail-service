@@ -5,7 +5,10 @@ import (
 	templatesFiles "Morphyxis-mail-service/internal/templates/files"
 	"bytes"
 	"context"
-	"net/smtp"
+	"crypto/tls"
+	"strconv"
+
+	"github.com/wneessen/go-mail"
 )
 
 func NewClient(ctx context.Context) (SmtpMailClient, error) {
@@ -14,14 +17,23 @@ func NewClient(ctx context.Context) (SmtpMailClient, error) {
 		return SmtpMailClient{}, err
 	}
 
-	auth := smtp.PlainAuth(
-		"",
-		config.User,
-		config.Password,
-		config.Host,
-	)
+	return SmtpMailClient{ctx: ctx, smtpConfig: config}, nil
+}
 
-	return SmtpMailClient{ctx: ctx, smtpConfig: config, smtpAuth: auth}, nil
+func (client SmtpMailClient) newMailClient() (*mail.Client, error) {
+	port, err := strconv.Atoi(client.Port)
+	if err != nil {
+		return nil, err
+	}
+
+	return mail.NewClient(
+		client.Host,
+		mail.WithPort(port),
+		mail.WithSMTPAuth(mail.SMTPAuthPlain),
+		mail.WithUsername(client.User),
+		mail.WithPassword(client.Password),
+		mail.WithTLSConfig(&tls.Config{ServerName: client.Host}),
+	)
 }
 
 func (client SmtpMailClient) SendAccountConfirmationEmail(input SendAccountConfirmationEmailInput) error {
@@ -41,26 +53,22 @@ func (client SmtpMailClient) SendAccountConfirmationEmail(input SendAccountConfi
 		return err
 	}
 
-	message := createSmtpMessage(
-		client.User,
-		input.To,
-		input.Subject,
-		body.String(),
-	)
+	msg := mail.NewMsg()
+	if err := msg.From(client.User); err != nil {
+		return err
+	}
+	if err := msg.To(input.To); err != nil {
+		return err
+	}
+	msg.Subject(input.Subject)
+	msg.SetBodyString(mail.TypeTextHTML, body.String())
 
-	err := smtp.SendMail(
-		client.Host+":"+client.Port,
-		client.smtpAuth,
-		client.User,
-		[]string{input.To},
-		message,
-	)
-
+	mailClient, err := client.newMailClient()
 	if err != nil {
 		return err
 	}
 
-	return nil
+	return mailClient.DialAndSend(msg)
 }
 
 func (client SmtpMailClient) SendAccountVerifiedEmail(input SendAccountVerifiedEmailInput) error {
@@ -78,26 +86,22 @@ func (client SmtpMailClient) SendAccountVerifiedEmail(input SendAccountVerifiedE
 		return err
 	}
 
-	message := createSmtpMessage(
-		client.User,
-		input.To,
-		input.Subject,
-		body.String(),
-	)
+	msg := mail.NewMsg()
+	if err := msg.From(client.User); err != nil {
+		return err
+	}
+	if err := msg.To(input.To); err != nil {
+		return err
+	}
+	msg.Subject(input.Subject)
+	msg.SetBodyString(mail.TypeTextHTML, body.String())
 
-	err := smtp.SendMail(
-		client.Host+":"+client.Port,
-		client.smtpAuth,
-		client.User,
-		[]string{input.To},
-		message,
-	)
-
+	mailClient, err := client.newMailClient()
 	if err != nil {
 		return err
 	}
 
-	return nil
+	return mailClient.DialAndSend(msg)
 }
 
 func (client SmtpMailClient) SendPasswordWasChangedEmail(input SendPasswordWasChangedEmailInput) error {
@@ -116,26 +120,22 @@ func (client SmtpMailClient) SendPasswordWasChangedEmail(input SendPasswordWasCh
 		return err
 	}
 
-	message := createSmtpMessage(
-		client.User,
-		input.To,
-		input.Subject,
-		body.String(),
-	)
+	msg := mail.NewMsg()
+	if err := msg.From(client.User); err != nil {
+		return err
+	}
+	if err := msg.To(input.To); err != nil {
+		return err
+	}
+	msg.Subject(input.Subject)
+	msg.SetBodyString(mail.TypeTextHTML, body.String())
 
-	err := smtp.SendMail(
-		client.Host+":"+client.Port,
-		client.smtpAuth,
-		client.User,
-		[]string{input.To},
-		message,
-	)
-
+	mailClient, err := client.newMailClient()
 	if err != nil {
 		return err
 	}
 
-	return nil
+	return mailClient.DialAndSend(msg)
 }
 
 func (client SmtpMailClient) SendDeletedAccountEmail(input SendDeletedAccountEmailInput) error {
@@ -154,24 +154,20 @@ func (client SmtpMailClient) SendDeletedAccountEmail(input SendDeletedAccountEma
 		return err
 	}
 
-	message := createSmtpMessage(
-		client.User,
-		input.To,
-		input.Subject,
-		body.String(),
-	)
+	msg := mail.NewMsg()
+	if err := msg.From(client.User); err != nil {
+		return err
+	}
+	if err := msg.To(input.To); err != nil {
+		return err
+	}
+	msg.Subject(input.Subject)
+	msg.SetBodyString(mail.TypeTextHTML, body.String())
 
-	err := smtp.SendMail(
-		client.Host+":"+client.Port,
-		client.smtpAuth,
-		client.User,
-		[]string{input.To},
-		message,
-	)
-
+	mailClient, err := client.newMailClient()
 	if err != nil {
 		return err
 	}
 
-	return nil
+	return mailClient.DialAndSend(msg)
 }

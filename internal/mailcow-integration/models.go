@@ -3,7 +3,6 @@ package mailcowIntegration
 import (
 	"context"
 	"fmt"
-	"net/smtp"
 	"time"
 )
 
@@ -27,7 +26,6 @@ func (input SendEmailInput) Validate() error {
 type SmtpMailClient struct {
 	ctx context.Context
 	smtpConfig
-	smtpAuth smtp.Auth
 }
 
 type SendAccountConfirmationEmailInput struct {
