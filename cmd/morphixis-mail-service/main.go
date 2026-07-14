@@ -1,13 +1,14 @@
 package main
 
 import (
-	apiDocs "Morphyxis-mail-service/internal/api-docs"
-	mailcowIntegration "Morphyxis-mail-service/internal/mailcow-integration"
-	mails "Morphyxis-mail-service/internal/mails"
 	"context"
 	"fmt"
 	"log"
 	"os"
+
+	apiDocs "github.com/TymekGluch/Morphyxis-mail-service/internal/api-docs"
+	mailcowIntegration "github.com/TymekGluch/Morphyxis-mail-service/internal/mailcow-integration"
+	mails "github.com/TymekGluch/Morphyxis-mail-service/internal/mails"
 
 	"github.com/gofiber/fiber/v3"
 )
@@ -20,7 +21,7 @@ const (
 )
 
 // @title Morphyxis-mail-service API
-// @version 1.1.0
+// @version 1.1.1
 // @description Morphyxis-mail-service API documentation
 // @BasePath /api
 // @schemes https http

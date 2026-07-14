@@ -1,12 +1,13 @@
 package mailcowIntegration
 
 import (
-	"Morphyxis-mail-service/internal/templates"
-	templatesFiles "Morphyxis-mail-service/internal/templates/files"
 	"bytes"
 	"context"
 	"crypto/tls"
 	"strconv"
+
+	"github.com/TymekGluch/Morphyxis-mail-service/internal/templates"
+	templatesFiles "github.com/TymekGluch/Morphyxis-mail-service/internal/templates/files"
 
 	"github.com/wneessen/go-mail"
 )

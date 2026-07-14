@@ -1,8 +1,9 @@
 package apiDocs
 
 import (
-	"Morphyxis-mail-service/internal/docs"
 	"strings"
+
+	"github.com/TymekGluch/Morphyxis-mail-service/internal/docs"
 )
 
 func configureSwaggerHost(appURL string) {
