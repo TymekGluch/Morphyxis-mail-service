@@ -5,7 +5,7 @@ Small Open source go lang package to handle Own Mail Server (Mailcow based) with
 ## Current Version
 
 ```bash
-1.1.1
+1.1.2
 ```
 
 ## Get Started
@@ -28,13 +28,13 @@ The Mailcow nginx configuration must be extended or overridden to proxy requests
 ## GHCR Registry
 
 - `ghcr.io/morphyxis/morphyxis-mail-service` - contains docker images for morphyxis mail service
-  - `1.1.1` - latest stable version of the image (tagged with git tag & build manually triggered)
+  - `1.1.2` - latest stable version of the image (tagged with git tag & build manually triggered)
   - `beta` - latest beta version of the image (built on pull request)
 
 to pull the image, execute command
 
 ```bash
-  docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.1.1
+  docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.1.2
 ```
 
 to run the image on your server:
@@ -48,17 +48,17 @@ docker run -d \
   -e MAILCOW_USER=someUser \
   -e MORPHYXIS_MAIL_SERVICE_PORT=8080 \
   -p 8080:8080 \
-  ghcr.io/morphyxis/morphyxis-mail-service:1.1.1
+  ghcr.io/morphyxis/morphyxis-mail-service:1.1.2
 ```
 
 or with file `.env` (recommended):
 
 ```bash
-docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.1.1
+docker pull ghcr.io/morphyxis/morphyxis-mail-service:1.1.2
 docker run -d \
   --env-file .env \
   -p 8080:8080 \
-  ghcr.io/morphyxis/morphyxis-mail-service:1.1.1
+  ghcr.io/morphyxis/morphyxis-mail-service:1.1.2
 ```
 
 ## Project Structure
