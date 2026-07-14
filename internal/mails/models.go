@@ -22,12 +22,12 @@ func (input SendAccountConfirmationEmailInput) Validate() error {
 		validation.Field(
 			&input.Name,
 			validation.Required,
-			validation.Length(3, 30),
+			validation.Length(3, 100),
 		),
 		validation.Field(
 			&input.Subject,
 			validation.Required,
-			validation.Length(3, 100),
+			validation.Length(3, 140),
 		),
 		validation.Field(
 			&input.VerificationCode,
@@ -58,12 +58,12 @@ func (input SendAccountVerifiedEmailInput) Validate() error {
 		validation.Field(
 			&input.Name,
 			validation.Required,
-			validation.Length(3, 30),
+			validation.Length(3, 100),
 		),
 		validation.Field(
 			&input.Subject,
 			validation.Required,
-			validation.Length(3, 100),
+			validation.Length(3, 140),
 		),
 	)
 
@@ -85,12 +85,12 @@ func (input SendPasswordWasChangedEmailInput) Validate() error {
 		validation.Field(
 			&input.Name,
 			validation.Required,
-			validation.Length(3, 30),
+			validation.Length(3, 100),
 		),
 		validation.Field(
 			&input.Subject,
 			validation.Required,
-			validation.Length(3, 100),
+			validation.Length(3, 140),
 		),
 		validation.Field(
 			&input.DateOfRequest,
@@ -116,17 +116,17 @@ func (input SendDeletedAccountEmailInput) Validate() error {
 		validation.Field(
 			&input.Name,
 			validation.Required,
-			validation.Length(3, 30),
+			validation.Length(3, 100),
 		),
 		validation.Field(
 			&input.Subject,
 			validation.Required,
-			validation.Length(3, 100),
+			validation.Length(3, 140),
 		),
 		validation.Field(
 			&input.Reason,
 			validation.Required,
-			validation.Length(3, 100),
+			validation.Length(3, 140),
 		),
 	)
 
