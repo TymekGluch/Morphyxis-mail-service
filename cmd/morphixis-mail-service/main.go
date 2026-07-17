@@ -21,7 +21,7 @@ const (
 )
 
 // @title Morphyxis-mail-service API
-// @version 1.1.2
+// @version 1.1.3
 // @description Morphyxis-mail-service API documentation
 // @BasePath /api
 // @schemes https http
